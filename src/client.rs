@@ -100,6 +100,16 @@ impl SuperstackApiClient {
             .send()
             .await?;
 
+        if !response.status().is_success() {
+            let status = response.status();
+            let text = response.text().await?;
+            return Err(anyhow::anyhow!(
+                "Request to hyperliquid exchange endpoint failed with status {}, error: {}",
+                status,
+                text
+            ));
+        }
+
         let response_status = response.json().await?;
 
         match response_status {
@@ -173,7 +183,7 @@ impl SuperstackApiClient {
         let exchange_response = self
             .post_wallet_api_exchange(action, vault_address, expires_after)
             .await?;
-        println!(
+        tracing::debug!(
             "exchange_response: {:?}",
             serde_json::to_string(&exchange_response)?
         );
@@ -236,10 +246,19 @@ impl SuperstackApiClient {
 
     pub async fn modify(
         &self,
-        modifies: BulkModify,
+        mut modifies: BulkModify,
         vault_address: Option<Address>,
         expires_after: Option<u64>,
     ) -> Result<HypeExchangeResponse> {
+        for modify in &mut modifies.modifies {
+            modify.order.limit_px =
+                float_to_string_for_hashing(modify.order.limit_px.parse::<f64>()?);
+            modify.order.sz = float_to_string_for_hashing(modify.order.sz.parse::<f64>()?);
+            if let Order::Trigger(trigger) = &mut modify.order.order_type {
+                trigger.trigger_px =
+                    float_to_string_for_hashing(trigger.trigger_px.parse::<f64>()?);
+            }
+        }
         let action = Actions::BatchModify(modifies);
         self.post_exchange(action, vault_address, expires_after)
             .await

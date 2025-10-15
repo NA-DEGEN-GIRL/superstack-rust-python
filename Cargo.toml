@@ -30,13 +30,45 @@ chrono = "0.4"
 
 
 [[example]]
-name = "simple"
-path = "examples/simple.rs"
-
-[[example]]
 name = "api_info"
 path = "examples/api_info.rs"
 
 [[example]]
 name = "order"
 path = "examples/order.rs"
+
+[[example]]
+name = "order_and_cancel"
+path = "examples/order_and_cancel.rs"
+
+[[example]]
+name = "order_and_cancel_cloid"
+path = "examples/order_and_cancel_cloid.rs"
+
+[[example]]
+name = "order_and_schedule_cancel"
+path = "examples/order_and_schedule_cancel.rs"
+
+[[example]]
+name = "order_and_modify"
+path = "examples/order_and_modify.rs"
+
+[[example]]
+name = "leverage"
+path = "examples/leverage.rs"
+
+[[example]]
+name = "margin"
+path = "examples/margin.rs"
+
+[[example]]
+name = "usdc_transfer"
+path = "examples/usdc_transfer.rs"
+
+[[example]]
+name = "spot_transfer"
+path = "examples/spot_transfer.rs"
+
+[[example]]
+name = "usd_class_transfer"
+path = "examples/usd_class_transfer.rs"

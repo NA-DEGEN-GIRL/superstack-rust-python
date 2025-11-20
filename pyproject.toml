@@ -17,7 +17,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 include-package-data = true
 packages = ["superstack"]                 # <-- 추가: top-level 패키지명 명시
-package-dir = { "" = "superstack_py" }    # <-- 추가: 패키지 소스 루트는 superstack_py/
+package-dir = { "superstack" = "superstack_py" }    # <-- 추가: 패키지 소스 루트는 superstack_py/
 
 [project.urls]
 Source = "https://github.com/NA-DEGEN-GIRL/superstack-rust-python"

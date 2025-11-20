@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Optional, Any, Dict, Union, Literal, Annotated
+from enum import Enum  # comment: [추가] Enum 사용
 
 from pydantic import BaseModel, Field, AliasChoices
 
@@ -8,7 +9,7 @@ from pydantic import BaseModel, Field, AliasChoices
 # 서버에서 내려오는 API Info는 Rust에서 rename_all을 사용하지 않았으므로
 # 필드명 그대로(snake_case) 파싱합니다.
 
-class Network(str):
+class Network(str, Enum):  # comment: [변경] Pydantic이 인식 가능한 Enum으로 선언
     # Rust enum과 동일한 문자열 표현을 유지 ("Ethereum", "Solana")
     Ethereum = "Ethereum"
     Solana = "Solana"
@@ -30,7 +31,7 @@ WalletSet = Annotated[
 
 class WalletInfo(BaseModel):
     address: str
-    network: Network  # 문자열 그대로
+    network: Network  # 문자열 → Enum 자동 변환
     wallet_set: WalletSet
 
     model_config = dict(populate_by_name=True)
@@ -42,17 +43,13 @@ class UserInfo(BaseModel):
 
     def get_evm_main_wallet(self) -> Optional[WalletInfo]:
         for w in self.wallets:
-            if w.network == Network.Ethereum and (
-                w.wallet_set == "Main" or (isinstance(w.wallet_set, dict) and "Main" in w.wallet_set)  # 관용 처리
-            ):
+            if w.network == Network.Ethereum and (w.wallet_set == "Main"):
                 return w
         return None
 
     def get_solana_main_wallet(self) -> Optional[WalletInfo]:
         for w in self.wallets:
-            if w.network == Network.Solana and (
-                w.wallet_set == "Main" or (isinstance(w.wallet_set, dict) and "Main" in w.wallet_set)
-            ):
+            if w.network == Network.Solana and (w.wallet_set == "Main"):
                 return w
         return None
 

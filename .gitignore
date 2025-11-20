@@ -23,3 +23,6 @@ target
 .env
 **gpt**
 ai_models.txt
+.venv
+.python-version
+__pychache__/

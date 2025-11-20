@@ -18,8 +18,13 @@ build-backend = "setuptools.build_meta"
 # comment: 패키지 내 포함 파일 자동 포함
 include-package-data = true
 
+# comment: 패키지 소스 루트를 superstack_py 로 지정
+[tool.setuptools.package-dir]
+"" = "superstack_py"
+
 [tool.setuptools.packages.find]
-# comment: 루트(superstack_py) 기준으로 'superstack' 패키지 검색
+# comment: superstack_py 아래에서만 패키지를 찾음
+where = ["superstack_py"]
 include = ["superstack*"]
 
 [project.urls]

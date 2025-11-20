@@ -1,8 +1,0 @@
-LICENSE
-README.md
-pyproject.toml
-superstack_py/superstack.egg-info/PKG-INFO
-superstack_py/superstack.egg-info/SOURCES.txt
-superstack_py/superstack.egg-info/dependency_links.txt
-superstack_py/superstack.egg-info/requires.txt
-superstack_py/superstack.egg-info/top_level.txt

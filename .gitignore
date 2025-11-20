@@ -21,3 +21,5 @@ target
 #.idea/
 
 .env
+**gpt**
+ai_models.txt

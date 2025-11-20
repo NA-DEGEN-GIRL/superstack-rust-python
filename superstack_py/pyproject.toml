@@ -1,0 +1,26 @@
+[project]
+name = "superstack"
+version = "0.1.0"
+description = "Python port of superstack-rust-sdk"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "httpx>=0.27.0",
+  "pydantic>=2.7.0",
+  "typing-extensions>=4.8.0"
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# comment: 패키지 내 포함 파일 자동 포함
+include-package-data = true
+
+[tool.setuptools.packages.find]
+# comment: 루트(superstack_py) 기준으로 'superstack' 패키지 검색
+include = ["superstack*"]
+
+[project.urls]
+Source = "https://github.com/NA-DEGEN-GIRL/superstack-rust-python"  # comment: 실제 리포 주소로 교체

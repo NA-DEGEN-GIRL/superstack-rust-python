@@ -15,16 +15,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# comment: 패키지 내 포함 파일 자동 포함
 include-package-data = true
-
-# comment: 패키지 소스 루트를 superstack_py 로 지정
-[tool.setuptools.package-dir]
-"" = "superstack_py"
-
-[tool.setuptools.packages.find]
-where = ["superstack_py"]
-include = ["superstack*"]
+packages = ["superstack"]                 # <-- 추가: top-level 패키지명 명시
+package-dir = { "" = "superstack_py" }    # <-- 추가: 패키지 소스 루트는 superstack_py/
 
 [project.urls]
 Source = "https://github.com/NA-DEGEN-GIRL/superstack-rust-python"

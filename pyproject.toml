@@ -23,9 +23,8 @@ include-package-data = true
 "" = "superstack_py"
 
 [tool.setuptools.packages.find]
-# comment: superstack_py 아래에서만 패키지를 찾음
 where = ["superstack_py"]
 include = ["superstack*"]
 
 [project.urls]
-Source = "https://github.com/NA-DEGEN-GIRL/superstack-rust-python"  # comment: 실제 리포 주소로 교체
+Source = "https://github.com/NA-DEGEN-GIRL/superstack-rust-python"
